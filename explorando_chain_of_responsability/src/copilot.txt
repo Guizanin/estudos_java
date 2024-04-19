@@ -1,0 +1,66 @@
+PERGUNTA:
+tenho 3 classes java, a Class1, Class2, Class3. Todas as classes implementam a interface IClass que tem um metodo chamado show() e next(). Gostaria de guardar as 3 classes em um enum com os indices: STEP_1, STEP_2, STEP_3.  Em cada class  ao realizar um if verificando se o parametro INT é maior que 10 e menor que 20 para a Class1, maior que 21 e menor que 50 para Class2 e maior que 51 e menor que 100 para Class3 deve ou não chamar o metodo show, caso não entrem na condicional, deve chamar o metodo next passando esse parametro e o nome do indice do enum a qual pertence essa class. A Class quando chamada deve receber o paramentro que é o valor INT e o nome do enum, o qual deverá separar o número ao final da string STEP_ transformá-lo em um inteiro e somar 1 voltando a concatenar o resultado na palavra STEP_ que será passada como parametro caso a condiçao do if nao seja satisfeita
+
+RESPOSTA:
+
+// Enum para representar as etapas
+enum Step {
+    STEP_1, STEP_2, STEP_3
+}
+
+// Interface com os métodos show() e next()
+interface IClass {
+    void show();
+    void next(int value, Step step);
+}
+
+// Implementação da classe Class1
+class Class1 implements IClass {
+    @Override
+    public void show() {
+        System.out.println("Class1 - show()");
+    }
+
+    @Override
+    public void next(int value, Step step) {
+        int stepNumber = Integer.parseInt(step.name().substring(5));
+        if (value > 10 && value < 20) {
+            // Condição satisfeita, chama o método show()
+            show();
+        } else {
+            // Chama o método next() com o próximo índice
+            Step nextStep = Step.values()[(stepNumber + 1) % Step.values().length];
+            next(value, nextStep);
+        }
+    }
+}
+
+// Implementação similar para Class2 e Class3
+
+public class Main {
+    public static void main(String[] args) {
+        int value = 15; // Exemplo de valor INT
+
+        // Escolha a etapa inicial (STEP_1, STEP_2 ou STEP_3)
+        Step initialStep = Step.STEP_1;
+
+        // Crie uma instância da classe correspondente à etapa inicial
+        IClass initialClass;
+        switch (initialStep) {
+            case STEP_1:
+                initialClass = new Class1();
+                break;
+            case STEP_2:
+                initialClass = new Class2();
+                break;
+            case STEP_3:
+                initialClass = new Class3();
+                break;
+            default:
+                throw new IllegalArgumentException("Etapa inicial inválida");
+        }
+
+        // Chame o método next() com o valor e a etapa inicial
+        initialClass.next(value, initialStep);
+    }
+}

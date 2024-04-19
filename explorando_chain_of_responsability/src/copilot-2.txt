@@ -1,0 +1,44 @@
+Entendi! Vamos relacionar as três classes (Class1, Class2 e Class3) no enum StepEnum. Para fazer isso, podemos associar cada classe a um dos campos do enum. Aqui está um exemplo de como você pode fazer isso:
+
+Java
+
+public enum StepEnum {
+    STEP1(Class1.class),
+    STEP2(Class2.class),
+    STEP3(Class3.class);
+
+    private final Class<?> associatedClass;
+
+    StepEnum(Class<?> associatedClass) {
+        this.associatedClass = associatedClass;
+    }
+
+    public Class<?> getAssociatedClass() {
+        return associatedClass;
+    }
+}
+Código gerado por IA. Examine e use com cuidado. Mais informações em perguntas frequentes.
+Aqui estão os detalhes:
+
+Declaração do Enum:
+Criamos um enum chamado StepEnum.
+Cada campo (STEP1, STEP2 e STEP3) está associado a uma das classes (Class1, Class2 e Class3).
+Associação com as Classes:
+Usamos um construtor personalizado para associar cada campo a uma classe específica.
+O método getAssociatedClass() permite obter a classe associada a um determinado passo.
+Uso do Enum:
+Agora você pode usar o enum StepEnum para representar os passos nas suas classes.
+Por exemplo, se quiser associar Class1 ao STEP1, faça o seguinte:
+Java
+
+StepEnum step = StepEnum.STEP1;
+Class<?> associatedClass = step.getAssociatedClass(); // Retorna Class1.class
+Código gerado por IA. Examine e use com cuidado. Mais informações em perguntas frequentes.
+Benefícios:
+Essa abordagem torna o código mais organizado e permite que você relacione os passos diretamente às classes correspondentes.
+Adapte o exemplo acima às suas classes específicas e suas necessidades. Se tiver mais alguma dúvida, estou à disposição! 😊
+
+Referências:
+
+Enums Java: Como criar e utilizar enums no Java - DevMedia
+A Guide to Java Enums | Baeldung
