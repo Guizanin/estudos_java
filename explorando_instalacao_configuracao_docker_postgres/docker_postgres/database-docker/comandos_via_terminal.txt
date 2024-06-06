@@ -1,0 +1,13 @@
+//conecta com o postgres
+psql -U postgres
+
+//mostra o ip e porta
+SELECT
+  inet_server_addr(),
+  inet_server_port();
+
+//mostra a atual database
+SELECT current_database();
+
+//mostra todas databases no postgres
+""" \l """
